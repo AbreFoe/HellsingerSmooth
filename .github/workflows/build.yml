@@ -19,6 +19,8 @@ jobs:
         run: |
           curl -sSL -o bepinex.zip https://github.com/BepInEx/BepInEx/releases/download/v6.0.0-pre.2/BepInEx-Unity.IL2CPP-win-x64-6.0.0-pre.2.zip
           mkdir -p lib && unzip -q bepinex.zip 'BepInEx/core/*' -d lib
+          # The archive keeps Windows attributes: folders come out without the execute bit and can't be opened
+          chmod -R u+rwX lib
 
       - name: Build
         run: dotnet build src/HellsingerSmooth -c Release
