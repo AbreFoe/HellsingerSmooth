@@ -1,0 +1,12 @@
+# Build output
+bin/
+obj/
+*.user
+.vs/
+.idea/
+
+# BepInEx libraries for building (download separately, see README)
+lib/
+
+# Release archives are uploaded to GitHub Releases, not committed
+*.zip

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>UnityEngine.CoreModule</AssemblyName>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(MSBuildThisFileDirectory)..\..\..\lib\BepInEx\core</BepInExCore>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Il2CppInterop.Runtime"><HintPath>$(BepInExCore)\Il2CppInterop.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <ProjectReference Include="..\Il2Cppmscorlib\Il2Cppmscorlib.csproj" Private="false" />
+  </ItemGroup>
+</Project>

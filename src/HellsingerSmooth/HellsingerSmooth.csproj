@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>HellsingerSmooth</AssemblyName>
+    <RootNamespace>HellsingerSmooth</RootNamespace>
+    <Version>1.3.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Folder with BepInEx/core DLLs (from the BepInEx 6 IL2CPP release). -->
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(MSBuildThisFileDirectory)..\..\lib\BepInEx\core</BepInExCore>
+  </PropertyGroup>
+
+  <!--
+    Only BepInEx/Il2CppInterop core libraries (plus the tiny MonoBehaviour stubs) are referenced.
+    Every other Unity/HDRP type is resolved by reflection at runtime from the interop assemblies BepInEx generates on the
+    player's machine, so the plugin builds without the game files.
+  -->
+  <ItemGroup>
+    <Reference Include="BepInEx.Core"><HintPath>$(BepInExCore)\BepInEx.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="BepInEx.Unity.IL2CPP"><HintPath>$(BepInExCore)\BepInEx.Unity.IL2CPP.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppInterop.Runtime"><HintPath>$(BepInExCore)\Il2CppInterop.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppInterop.Common"><HintPath>$(BepInExCore)\Il2CppInterop.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExCore)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <!-- Compile-time stand-ins for the MonoBehaviour chain; never shipped (see RefStubs/README.md). -->
+    <ProjectReference Include="..\RefStubs\UnityEngine.CoreModule\UnityEngine.CoreModule.csproj" Private="false" />
+    <ProjectReference Include="..\RefStubs\Il2Cppmscorlib\Il2Cppmscorlib.csproj" Private="false" />
+  </ItemGroup>
+
+</Project>
